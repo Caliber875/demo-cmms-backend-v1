@@ -16,7 +16,7 @@ export interface IAsset extends Document {
   manufacturer?: string;
   outOfOrder?: 'Yes' | 'No';
   isActive?: 'Yes' | 'No';
-  category: string; // Main category: Equipment, Facilities, Products, Tools
+  category?: string; // Main category: Equipment, Facilities, Products, Tools (optional)
   department: string; // Department that owns/manages this asset
   size?: string;
   costPrice?: number;
@@ -147,7 +147,7 @@ const AssetSchema = new Schema<IAsset>(
     },
     category: {
       type: String,
-      required: [true, 'Category is required'],
+      // Category is now optional – many assets might not belong to a high-level category
       enum: {
         values: ['Equipment', 'Facilities', 'Products', 'Tools'],
         message: 'Category must be Equipment, Facilities, Products, or Tools',

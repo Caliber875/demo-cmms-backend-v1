@@ -600,14 +600,15 @@ export class AssetController {
       }
 
       // Validate that each asset has required fields
+      // Category is now OPTIONAL for imported assets – only assetName and department are mandatory
       const invalidAssets = assets.filter(asset => 
-        !asset.assetName || !asset.category || !asset.department
+        !asset.assetName || !asset.department
       );
 
       if (invalidAssets.length > 0) {
         res.status(400).json({
           success: false,
-          message: 'All assets must have assetName, category, and department',
+          message: 'All assets must have assetName and department',
           invalidCount: invalidAssets.length
         });
         return;
